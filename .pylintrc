@@ -1,0 +1,64 @@
+[tool.pylint.MASTER]
+init-hook=
+    try: import pylint_venv
+    except ImportError: pass
+    else: pylint_venv.inithook()
+ignore-paths = ^.*alembic.*$ , ^.*tests.*$
+# Use multiple processes to speed up Pylint.
+jobs=4
+
+ignored-classes=scoped_session,EditDataStoreForm, CreateScannerForm
+
+[SIMILARITIES]
+
+# Minimum lines number of a similarity.
+min-similarity-lines=5
+
+# Ignore comments when computing similarities.
+ignore-comments=yes
+
+# Ignore docstrings when computing similarities.
+ignore-docstrings=yes
+
+# Ignore imports when computing similarities.
+ignore-imports=yes
+
+[MESSAGES CONTROL]
+# Only show warnings with the listed confidence levels. Leave empty to show
+# all. Valid levels: HIGH, INFERENCE, INFERENCE_FAILURE, UNDEFINED.
+# confidence=
+
+disable= W0702,W1203,R0903,W1309,W1201,W0703,C0116, missing-class-docstring, import-outside-toplevel, trailing-whitespace
+
+# W0702: No exception type(s) specified
+# W1203: Use lazy % formatting
+# R0903: Too few public methods
+# R0201: Method could be a function
+# W1309: Using an f-string
+# W1201: Use lazy % formatting
+# W0703: Catching too general exception Exception
+
+
+
+[REPORTS]
+
+# Python expression which should return a score less than or equal to 10. You
+# have access to the variables 'error', 'warning', 'refactor', and 'convention'
+# which contain the number of messages in each category, as well as 'statement'
+# which is the total number of statements analyzed. This score is used by the
+# global evaluation report (RP0004).
+evaluation=10.0 - ((float(5 * error + warning + refactor + convention) / statement) * 10)
+
+output-format=text
+
+# Activate the evaluation score.
+score=yes
+
+[DESIGN]
+max-attributes=10
+max-args=10
+
+max-line-length = 100
+
+# Maximum number of locals for function / method body
+max-locals=20
